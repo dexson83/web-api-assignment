@@ -53,6 +53,10 @@ server.get('/history', (req, res) => {
     });
 })
 
+server.get('/about', (req, res) => {
+    res.render('about.hbs');
+})
+
 //Helper for display info - Block Helper
 hbs.registerHelper('list', (items, options) => {
     items = displayData;
