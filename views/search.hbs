@@ -1,0 +1,44 @@
+{{> header}}
+<div>
+    <div>
+        <div class="col-md-3">
+    <form action="search" method="post">
+        <div class="input-group">
+        <input class="form-control" type="text" id="place" name="query" placeholder="Entry Places" required>
+            <span class="input-group-btn">
+                <button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button><br>
+            </span>
+        </div>
+    </form>
+</div>
+    </div>
+</div>
+
+
+
+<div class="col-md-9">
+    <table class="table table-list-search">
+        <thead>
+        <tr>
+            <th>City Name</th>
+            <th>Country Code</th>
+            <th>Timezone</th>
+            <th>Weather</th>
+            <th>Air Condition</th>
+            <th>Temperature &#176;C</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#list items}}
+            <tr>
+                <td>{{cityName}}</td>
+                <td>{{countryCode}}</td>
+                <td>{{timezone}}</td>
+                <td>{{weather}}</td>
+                <td>{{temperature}}</td>
+                <td>{{aqi}}</td>
+            </tr>
+        {{/list}}
+        </tbody>
+    </table>
+</div>
