@@ -19,14 +19,14 @@ var con = mysql.createConnection({
 var displayData;
 var weatherData = [];
 
-//SETTINGS - FROM PAUL
+//SETTINGS 
 server.use(express.static(__dirname + '/public'));
 server.use(bodyParser.urlencoded({extended: true}));
 server.set('view engine', 'hbs');
 hbs.registerPartials(__dirname + '/views/template');
 hbs.registerPartials(__dirname + '/views');
 
-//DEFAULT INDEX PAGE
+//DEFAULT INDEX PAGE or Homepage
 server.get('/', (req, res) => {
     res.render('index.hbs');
 });
@@ -95,30 +95,15 @@ server.post('/search', (req, res) => {
                 res.render('search.hbs');
             }, 200)
         })
-        // const 
-        // for(var pos = 0; pos < response.data.length; pos++){
-        //     const name = response.data[pos].name;
-        //     const capital = response.data[pos].capital;
-        //     const region = response.data[pos].region;
-        //     const population = response.data[pos].population;
-        //     const currencies = response.data[pos].currencies[0];
-
-        //     //HERE
-        //     countryData.push([name, capital, region, population, currencies]);
-        //     displayData.push({'name': name, 'capital': capital, 'region': region, 'population': population, 'currencies': currencies});
-        // }
-        //HERE
-        // setTimeout(function(){
-        //     // addToDB(countryData);
-        //     res.render('search.hbs');
-        // }, 200)
     })
 });
 
+//test server connection
 server.listen(process.env.PORT || 4000, () => {
-    console.log('hello');
+    console.log('successful online');
 });
 
+//add history record to database
 function addToDB(dbData){
     var sql = `INSERT INTO weather (w_city_name, w_country_code, w_timezone, w_weather, w_aqi, w_temperature) VALUES ?`;
     con.query(sql, [dbData],function (err, result) {
@@ -128,10 +113,10 @@ function addToDB(dbData){
 }
 
 server.post('/del', (req, res) => {
-    var sql = `DELETE FROM countries`;
+    var sql = `DELETE FROM weather`;
     con.query(sql,function (err, result) {
         if (err) throw err;
-        console.log('Data has been cleared');
+        console.log('Data has been deleted');
         res.render('index.hbs');
     });
 });
