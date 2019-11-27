@@ -17,7 +17,7 @@ var con = mysql.createConnection({
 
 //DECLARATION
 var displayData;
-var weatherData = [];
+var weatherData;
 
 //SETTINGS 
 server.use(express.static(__dirname + '/public'));
@@ -75,6 +75,7 @@ hbs.registerHelper('list', (items, options) => {
 server.post('/search', (req, res) => {
     //HERE
     var searchQuery = req.body.query;
+    weatherData = [];
     displayData = [];
     const querystr1 = `https://api.weatherbit.io/v2.0/current?city=${searchQuery}&key=6460596c75524d5895068cf224d85706`;
     axios.get(querystr1).then((response) => {
