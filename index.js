@@ -57,6 +57,10 @@ server.get('/about', (req, res) => {
     res.render('about.hbs');
 })
 
+server.get('/error', (req, res) => {
+    res.render('error.hbs');
+})
+
 //Helper for display info - Block Helper
 hbs.registerHelper('list', (items, options) => {
     items = displayData;
@@ -96,6 +100,13 @@ server.post('/search', (req, res) => {
                 res.render('search.hbs');
             }, 200)
         })
+
+        .catch(function(error){
+            setTimeout(function(){
+                res.render('error.hbs');
+            })
+        })
+
     })
 });
 
